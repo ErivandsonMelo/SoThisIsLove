@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pergunta Especial</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #282a36; /* Fundo drácula */
+      color: #f8f8f2;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      color: #ff79c6; /* Rosa drácula romântico */
+    }
+
+    .button {
+      background-color: #bd93f9; /* Roxo drácula */
+      border: none;
+      color: #f8f8f2;
+      padding: 15px 30px;
+      margin: 10px;
+      font-size: 1.2em;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .button:hover {
+      background-color: #ffb86c;
+    }
+
+    #simBtn {
+      position: relative;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="mainScreen">
+    <h1>Aceita se casar comigo?</h1>
+    <button class="button" id="simBtn">Sim</button>
+    <button class="button" onclick="showDesistirScreen()">Não</button>
+  </div>
+
+  <div class="container hidden" id="desistirScreen">
+    <h1>Vai desistir de nós?</h1>
+    <button class="button" onclick="backToMain()">Não mesmo!</button>
+  </div>
+
+  <div class="container hidden" id="finalScreen">
+    <h1>Agora sim, Te amo mais que tudo meu bebê.<br>Prometo que nos casaremos e viveremos juntos lado a lado por toda a eternidade.</h1>
+  </div>
+
+  <script>
+    const simBtn = document.getElementById("simBtn");
+    let clickCount = 0;
+
+    simBtn.addEventListener("click", () => {
+      clickCount++;
+
+      if (clickCount < 6) {
+        const x = Math.random() * (window.innerWidth - 150);
+        const y = Math.random() * (window.innerHeight - 150);
+        simBtn.style.position = "absolute";
+        simBtn.style.left = `${x}px`;
+        simBtn.style.top = `${y}px`;
+      } else {
+        document.getElementById("mainScreen").classList.add("hidden");
+        document.getElementById("finalScreen").classList.remove("hidden");
+      }
+    });
+
+    function showDesistirScreen() {
+      document.getElementById("mainScreen").classList.add("hidden");
+      document.getElementById("desistirScreen").classList.remove("hidden");
+    }
+
+    function backToMain() {
+      document.getElementById("desistirScreen").classList.add("hidden");
+      document.getElementById("mainScreen").classList.remove("hidden");
+    }
+  </script>
+</body>
+</html>
